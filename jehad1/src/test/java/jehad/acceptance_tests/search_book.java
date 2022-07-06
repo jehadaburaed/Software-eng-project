@@ -25,6 +25,8 @@ public class search_book {
 		 book.adding_book( "C++ Development",  "Alu and Sami", "Alu07");
 		 book.adding_book( "Cucumber Java",  "Seb Rose", "Rose54");
 		 book.adding_book( "programming C++",  "Deitel", "Deitel4");
+			admin_user.logout();
+
 	   
 	}
 	
@@ -32,8 +34,11 @@ public class search_book {
 	
 	@When("the user searches for the text {string}")
 	public void theUserSearchesForTheText(String string) {
-		
 		book.search("99");
+		book.search("XP");
+		book.search("Seb");
+		book.search("Alu");
+
 		
 	   
 	}
@@ -46,11 +51,18 @@ public class search_book {
 	
 	@Then("no books are found")
 	public void noBooksAreFound() {
-		assertEquals( book.is_Found() , true );
+		book  = new jehad1.books() ;
+		book.search("Sofa");
+		
+		assertEquals( book.is_Found() , false );
 	}
 	
 	@Then("the books with code {string} and {string} are found")
 	public void theBooksWithCodeAndAreFound(String string, String string2) {
+		book  = new jehad1.books() ;
+		book.adding_book( "programming C++",  "Deitel", "Deitel4");
+		 book.adding_book( "C++ Development",  "Alu and Sami", "Alu07");
+		 book.search("C++");
 		assertEquals( book.is_Found() , true );
 	}
 

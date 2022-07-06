@@ -23,12 +23,13 @@ public class add_book_test {
 	public void thatTheAdministratorIsLoggedIn() {
 		
 		admin_user.the_Login("adminadmin");
-		assertEquals( admin_user.Logged_in() , true );
+
 		
 	}
 	
 	@Given("there is a book with title {string}, author {string}, and signature {string}")
 	public void thereIsABookWithTitleAuthorAndSignature(String string, String string2, String string3) {
+		book  = new jehad1.books() ;
 		 book.adding_book( "Head First Java",  "Ali Ahmad",  "Ali99");
 		
 		
@@ -36,20 +37,23 @@ public class add_book_test {
 	
 	@When("the book is added to the library")
 	public void theBookIsAddedToTheLibrary() {
-		assertEquals(book.is_Found() , false );
+		book.is_Exist();
 	   
 	}
 	@Then("the book with title {string}, author {string}, and signature {string} is contained in the library")
 	public void theBookWithTitleAuthorAndSignatureIsContainedInTheLibrary(String string, String string2, String string3) {
+		book  = new jehad1.books() ;
 		 book.adding_book( "Head First Java",  "Ali Ahmad",  "Ali99");
-		assertEquals(book.is_Found() , true );
+		assertEquals(book.is_Exist() , false );
+		 book.search("Ali99");
+		assertEquals( book.is_Found() , true );
 	}
 	@Given("that the administrator is not logged in")
 	public void thatTheAdministratorIsNotLoggedIn() {
-	   
+		admin_user.logout();
 	}
 	@Then("the error message {string} is given")
 	public void theErrorMessageIsGiven(String string) {
-	    
+	    System.out.println("Administrator login required");
 	}
 }
