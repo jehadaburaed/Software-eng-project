@@ -24,26 +24,16 @@ public class books {
 			strr3=strr.get(i);
 			for (int j = 0; j < 3; j++) {
 				
-		if (strr3.get(j).contains(str_searching)) {
-			str_searched=true;
-			str_Searched=strr3.get(2);
-			
-			
-			
-		}
-		
-		
-		
+				if (strr3.get(j).contains(str_searching)) {
+					str_searched=true;
+					str_Searched=strr3.get(2);			
+				}		
 			}
-			
 			
 			if (str_searched) {
-				is_Found();
-				
-			}
-			
-			
-	}
+				is_Found();				
+			}			
+		}
 		
 		}
 
@@ -78,19 +68,17 @@ public class books {
 			strr2=strr.get(i);
 			for (int j = 0; j < 3; j++) {
 				
-		if (strr2.get(j).equals(book_def.get(j))) {
-			str_search=true;
-		return ;
-		}
+				if (strr2.get(j).equals(book_def.get(j))) {
+					str_search=true;
+					return ;
+				}
 		
 		}
 			
 		}
 		
 		strr.add(book_def);
-		str_search=false;
-
-		
+		str_search=false;		
 		
 	}
 

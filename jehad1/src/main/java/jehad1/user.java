@@ -9,11 +9,11 @@ public class user {
 	String address;
 	String postal_code;
 	String city;
-	String password = "";
+	String password ="";
 	ArrayList<books> borrowed_books = new ArrayList<books>();
 	boolean max_borrowed = false;
-	int borrowed_old ;
-	ArrayList<ArrayList> strr = new ArrayList<ArrayList>();
+	int borrowed_old;
+	ArrayList<ArrayList> users = new ArrayList<ArrayList>();
 	ArrayList<String> user_def = new ArrayList<String>();
 	boolean str_search = false;
 	boolean str_searched = false;
@@ -38,41 +38,25 @@ public class user {
 //	}
 
 	public boolean Logged_in() {
-		
-		// error checking pass & id 
-		
-		if (password == "adminadmin")
-			return true;
-		else
-			return false;
-	}
-	
-	// the login taking id & pass not just pass 
 
-	public void the_Login(String strr) {
-
-		password = strr;
-	}
-
-	public void logout() {
-		password = "";
-
-	}
-
-	public void search(String str_searching) {
-		int searchListLength = strr.size();
+		// error checking pass & id
+		int searchListLength = users.size();
 
 		for (int i = 0; i < searchListLength; i++) {
-			ArrayList<String> strr3 = new ArrayList<String>();
-			strr3 = strr.get(i);
-			for (int j = 0; j < 3; j++) {
-
-				if (strr3.get(j).contains(str_searching)) {
-					str_searched = true;
-					str_Searched = strr3.get(2);
-
+			ArrayList<String> tmp = new ArrayList<String>();
+			tmp = users.get(i);
+			for (int j = 0; j < 2; j++) {
+				if (tmp.get(0).equals( )) {
+					//str_searched = true;
+					//str_Searched = tmp.get(2);
+					for(int k=0 ; k < 7 ; k++) {
+						if(tmp.get(1).equals( ))
+						{
+							
+						}
+					}
 				}
-
+				
 			}
 
 			if (str_searched) {
@@ -80,6 +64,38 @@ public class user {
 
 			}
 
+		}
+	}
+
+	// the login taking id & pass not just pass
+
+	public void the_Login(String email, String id) {
+		ID = id;
+		this.email = email;
+	}
+
+	public void logout() {
+		ID = "";
+		email = "";
+	}
+
+	public void search(String str_searching) {
+		int searchListLength = users.size();
+
+		for (int i = 0; i < searchListLength; i++) {
+			ArrayList<String> tmp = new ArrayList<String>();
+			tmp = users.get(i);
+			for (int j = 0; j < 6; j++) {
+
+				if (tmp.get(j).contains(str_searching)) {
+					str_searched = true;
+					str_Searched = tmp.get(0);
+				}
+			}
+
+			if (str_searched) {
+				is_Found();
+			}
 		}
 	}
 
@@ -94,7 +110,8 @@ public class user {
 
 	}
 
-	public void addUser(String ID, String name, String email, String address, String postal_code, String city) {
+	public void addUser(String ID, String name, String email, String address, String postal_code,
+			String city) {
 		ArrayList<String> user_def = new ArrayList<String>();
 		user_def.add(ID);
 		user_def.add(name);
@@ -102,18 +119,18 @@ public class user {
 		user_def.add(address);
 		user_def.add(postal_code);
 		user_def.add(city);
-		
-		// miss_useing to strr & strr2 >> they are for books not users  
 
-		ArrayList<String> strr2;
+		// miss_useing to strr & strr2 >> they are for books not users
 
-		int searchListLength = strr.size();
+		ArrayList<String> tmp;
+
+		int searchListLength = users.size();
 
 		for (int i = 0; i < searchListLength; i++) {
-			strr2 = strr.get(i);
-			for (int j = 0; j < 3; j++) {
+			tmp = users.get(i);
+			for (int j = 0; j < 6; j++) {
 
-				if (strr2.get(j).equals(user_def.get(j))) {
+				if (tmp.get(j).equals(user_def.get(j))) {
 					str_search = true;
 					return;
 				}
@@ -122,29 +139,34 @@ public class user {
 
 		}
 
-		strr.add(user_def);
+		users.add(user_def);
 		str_search = false;
 
 	}
-	
+
 	public void set_max_borrowed(boolean m) {
 		max_borrowed = m;
 	}
-	
+
 	public boolean get_max_borrowed() {
 		return max_borrowed;
 	}
-	
+
 	public void add_borrow(books book) {
 		borrowed_old = borrowed_books.size();
-		// if ( borrowed_old<max_borrowed )   >>> else sys.out....
-		borrowed_books.add(book);		
+		
+		if ( borrowed_old == 5 ){
+			max_borrowed = true;
+			
+		}		
+		else if(borrowed_old < 5)		
+			borrowed_books.add(book);
 	}
-	
+
 	public int get_borrowed_old() {
 		return borrowed_old;
 	}
-	
+
 	public int get_borrowed_size() {
 		return borrowed_books.size();
 	}

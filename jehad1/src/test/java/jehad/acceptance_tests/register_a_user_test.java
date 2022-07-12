@@ -44,7 +44,7 @@ public void thatTheAdministratorrIsNotLoggedIn() {
 	}
 	
 	
-	@Then(" erroor message {string} is given")
+	@Then(" errror message {string} is given")
 public void theErrorMassageIsGivenn(String string) {
     
 }
