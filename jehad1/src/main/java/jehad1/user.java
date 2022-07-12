@@ -3,21 +3,29 @@ package jehad1;
 import java.util.*;
 
 public class user {
+	jehad1.admin_user admin_user  = new jehad1.admin_user();
 	String ID;
 	String name;
 	String email;
 	String address;
 	String postal_code;
+	
 	String city;
 	String password ="";
-	ArrayList<books> borrowed_books = new ArrayList<books>();
+	ArrayList<String> adding_borrow = new ArrayList<String>();
+	ArrayList<ArrayList> borrowed_books = new ArrayList<ArrayList>();
 	boolean max_borrowed = false;
 	int borrowed_old;
 	ArrayList<ArrayList> users = new ArrayList<ArrayList>();
 	ArrayList<String> user_def = new ArrayList<String>();
+	boolean user_search = false;
+	boolean user_searched = false;
 	boolean str_search = false;
 	boolean str_searched = false;
+	boolean borrowed_successfully = false ;
+	boolean removed = false ;
 	String str_Searched = " ";
+	String user_Searched = " ";
 
 //	public user() {
 //		this.ID = null;
@@ -39,47 +47,24 @@ public class user {
 
 	public boolean Logged_in() {
 
-		// error checking pass & id
-		int searchListLength = users.size();
-
-		for (int i = 0; i < searchListLength; i++) {
-			ArrayList<String> tmp = new ArrayList<String>();
-			tmp = users.get(i);
-			for (int j = 0; j < 2; j++) {
-				if (tmp.get(0).equals( )) {
-					//str_searched = true;
-					//str_Searched = tmp.get(2);
-					for(int k=0 ; k < 7 ; k++) {
-						if(tmp.get(1).equals( ))
-						{
-							
-						}
-					}
-				}
-				
-			}
-
-			if (str_searched) {
-				is_Found();
-
-			}
-
-		}
+		return user_searched;
 	}
 
-	// the login taking id & pass not just pass
+	
 
-	public void the_Login(String email, String id) {
+	public void the_Login( String id) {
 		ID = id;
-		this.email = email;
+		users_search(ID);
+		
+		
 	}
 
 	public void logout() {
 		ID = "";
-		email = "";
+		
 	}
 
-	public void search(String str_searching) {
+	public void users_search(String str_searching) {
 		int searchListLength = users.size();
 
 		for (int i = 0; i < searchListLength; i++) {
@@ -87,14 +72,14 @@ public class user {
 			tmp = users.get(i);
 			for (int j = 0; j < 6; j++) {
 
-				if (tmp.get(j).contains(str_searching)) {
-					str_searched = true;
-					str_Searched = tmp.get(0);
+				if (tmp.get(j).equals(str_searching)) {
+					user_searched = true;
+					user_Searched = tmp.get(0);
 				}
 			}
 
-			if (str_searched) {
-				is_Found();
+			if (user_searched) {
+				user_Found();
 			}
 		}
 	}
@@ -102,16 +87,28 @@ public class user {
 	public boolean is_Found() {
 
 		if (str_searched) {
-			System.out.println("the user with ID " + str_Searched + " is found");
+			System.out.println("the book with ID " + str_Searched + " is found");
 
 		}
 
 		return str_searched;
 
 	}
+	
+	public boolean user_Found() {
 
-	public void addUser(String ID, String name, String email, String address, String postal_code,
-			String city) {
+		if (user_searched) {
+			System.out.println("the user with ID " + user_Searched + " is found");
+
+		}
+
+		return user_searched;
+
+	}
+
+	public void addUser(String ID, String name, String email, String address, String postal_code,String city)
+	{
+		if(true) {
 		ArrayList<String> user_def = new ArrayList<String>();
 		user_def.add(ID);
 		user_def.add(name);
@@ -120,7 +117,7 @@ public class user {
 		user_def.add(postal_code);
 		user_def.add(city);
 
-		// miss_useing to strr & strr2 >> they are for books not users
+		
 
 		ArrayList<String> tmp;
 
@@ -131,7 +128,7 @@ public class user {
 			for (int j = 0; j < 6; j++) {
 
 				if (tmp.get(j).equals(user_def.get(j))) {
-					str_search = true;
+					user_search = true;
 					return;
 				}
 
@@ -140,7 +137,10 @@ public class user {
 		}
 
 		users.add(user_def);
-		str_search = false;
+		user_search = false;
+		}
+		
+		else System.out.println("Admin login is required");
 
 	}
 
@@ -152,15 +152,43 @@ public class user {
 		return max_borrowed;
 	}
 
-	public void add_borrow(books book) {
-		borrowed_old = borrowed_books.size();
+	public void add_borrow(String book_id , String user_id) {
+		borrowed_old=0;
+		if ( Logged_in() ) {
+			
+			int searchListLength = borrowed_books.size();
+
+			for (int i = 0; i < searchListLength; i++) {
+				ArrayList<String> tmp = new ArrayList<String>();
+				tmp = borrowed_books.get(i);
+				for (int j = 0; j < 2 ; j++) {
+
+					if (tmp.get(j).equals(user_id)) {
+						borrowed_old++;
+						
+					}
+				}
+	
+			}
+			
 		
 		if ( borrowed_old == 5 ){
+			 System.out.println("you can't borrow more than five books");
 			max_borrowed = true;
 			
 		}		
-		else if(borrowed_old < 5)		
-			borrowed_books.add(book);
+		else if(borrowed_old < 5)	{
+			
+			
+			ArrayList<String> adding_borrow = new ArrayList<String>();
+			adding_borrow.add(book_id);
+			adding_borrow.add(user_id);
+			borrowed_books.add(adding_borrow);
+			borrowed_successfully = true;
+			 System.out.println("borrowed successfully");
+		}
+	}
+		else System.out.println("user login required");
 	}
 
 	public int get_borrowed_old() {
@@ -170,10 +198,46 @@ public class user {
 	public int get_borrowed_size() {
 		return borrowed_books.size();
 	}
+	public boolean borrowed_successfully() {
+		return borrowed_successfully;
+	}
 
 	public boolean is_Exist() {
 
 		return str_search;
 
 	}
-}
+	
+	
+	public void return_book(String book_id , String user_id) {
+		 removed = false ;
+		if (true)
+		{
+			ArrayList<String> check = new ArrayList<String>();
+			check.add(book_id);
+			check.add(user_id);
+			int searchListLength = borrowed_books.size();
+
+			for (int i = 0; i < searchListLength; i++) {
+				
+					if ( borrowed_books.get(i).equals(check) ) {
+						borrowed_books.remove(i);
+						 removed = true ;
+						 System.out.println("removed successfully");
+					}
+				}
+			
+			}
+		}
+	
+	public boolean is_removed() {
+
+		return removed;
+	
+	}
+	
+	
+	}
+	
+	
+

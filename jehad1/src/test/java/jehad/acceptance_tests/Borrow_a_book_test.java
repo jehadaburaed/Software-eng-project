@@ -16,8 +16,10 @@ public class Borrow_a_book_test {
 		
 		user1 = new jehad1.user();
 		book = new jehad1.books();
+		user1.addUser("11924313", "Jehad Nael", "jeh@gmail.com", "Sebastia street", "A26HW3", "Sebastia");	
 
 	}
+	
 
 	@Given(" the user is logged in")
 	public void thatTheUserIsLoggedInn() {
@@ -31,7 +33,7 @@ public class Borrow_a_book_test {
 	
 	@Given("theree is a book with title {string}, author {string}, and signature {string}")
 	public void thereeIsABookWithTitleAuthorAndSignature(String string, String string2, String string3) {
-	    
+		user1.add_borrow("Ali99" , "11924313");
 	}
 
 	@Given("the user has borrowed the maximum number of books")
@@ -48,14 +50,14 @@ public class Borrow_a_book_test {
 
 	@When("the user has borrow a book from the library")
 	public void theUserIsBorrowABookFromTheLibrary() {
-		user1.add_borrow(book);
+		user1.users_search("11924313");
+		user1.add_borrow("Ali99" , "11924313");
 	}
 
 	@Then("Borrowing completed successfully")
 	public void borrowingCompletedSuccessfully() {
-		user1.add_borrow(book);
-		assertTrue(user1.get_borrowed_old()<user1.get_borrowed_size());
-		assertFalse(user1.get_max_borrowed());
+		assertEquals(user1.borrowed_successfully() , true );
+		
 	}
 	
 	
