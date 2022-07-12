@@ -19,8 +19,8 @@ public class Borrow_a_book_test {
 
 	}
 
-	@Given("that the user is logged in")
-	public void thatTheUserIsLoggedIn() {
+	@Given(" the user is logged in")
+	public void thatTheUserIsLoggedInn() {
 		user1.the_Login("adminadmin");
 	}
 
@@ -29,7 +29,10 @@ public class Borrow_a_book_test {
 		user1.set_max_borrowed(false);
 	}
 	
-	
+	@Given("theree is a book with title {string}, author {string}, and signature {string}")
+	public void thereeIsABookWithTitleAuthorAndSignature(String string, String string2, String string3) {
+	    
+	}
 
 	@Given("the user has borrowed the maximum number of books")
 	public void theUserHasBorrowedTheMaximumNumberOfBooks() {
@@ -37,8 +40,8 @@ public class Borrow_a_book_test {
 	}
 	
 
-	@Given("that the user is logged out")
-	public void thatTheUserIsLoggedOut() {
+	@Given(" thee user is logged out")
+	public void thatTheeUserIsLoggedOut() {
 		user1.logout();		
 	}
 
@@ -54,5 +57,11 @@ public class Borrow_a_book_test {
 		assertTrue(user1.get_borrowed_old()<user1.get_borrowed_size());
 		assertFalse(user1.get_max_borrowed());
 	}
+	
+	
+	@Then("the erroor message {string} is given")
+	public void theErrorrMessageeIsGiven(String string) {
+	    
+	}
 
-}
+}   

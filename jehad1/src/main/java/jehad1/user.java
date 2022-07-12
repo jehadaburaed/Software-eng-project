@@ -38,11 +38,16 @@ public class user {
 //	}
 
 	public boolean Logged_in() {
+		
+		// error checking pass & id 
+		
 		if (password == "adminadmin")
 			return true;
 		else
 			return false;
 	}
+	
+	// the login taking id & pass not just pass 
 
 	public void the_Login(String strr) {
 
@@ -97,6 +102,8 @@ public class user {
 		user_def.add(address);
 		user_def.add(postal_code);
 		user_def.add(city);
+		
+		// miss_useing to strr & strr2 >> they are for books not users  
 
 		ArrayList<String> strr2;
 
@@ -130,6 +137,7 @@ public class user {
 	
 	public void add_borrow(books book) {
 		borrowed_old = borrowed_books.size();
+		// if ( borrowed_old<max_borrowed )   >>> else sys.out....
 		borrowed_books.add(book);		
 	}
 	

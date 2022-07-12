@@ -48,12 +48,12 @@ public class add_book_test {
 		 book.search("Ali99");
 		assertEquals( book.is_Found() , true );
 	}
-	@Given("that the administrator is not logged in")
-	public void thatTheAdministratorIsNotLoggedIn() {
+	@Given("that the administraator is not logged in")
+	public void thatTheAdministratoorIsNotLoggedIn() {
 		admin_user.logout();
 	}
-	@Then("the error message {string} is given")
-	public void theErrorMessageIsGiven(String string) {
+	@Then("the error messsage {string} is given")
+	public void theErrorMessaggeIsGiven(String string) {
 	    System.out.println("Administrator login required");
 	}
-}
+} 
