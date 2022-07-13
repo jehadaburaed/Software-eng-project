@@ -129,6 +129,7 @@ public class user {
 
 				if (tmp.get(j).equals(user_def.get(j))) {
 					user_search = true;
+					System.out.println("This user is already registered");
 					return;
 				}
 
@@ -138,6 +139,8 @@ public class user {
 
 		users.add(user_def);
 		user_search = false;
+		System.out.println("Registering a user done successfully");
+		return;
 		}
 		
 		else System.out.println("Admin login is required");
@@ -166,6 +169,7 @@ public class user {
 					if (tmp.get(j).equals(user_id)) {
 						borrowed_old++;
 						
+						
 					}
 				}
 	
@@ -175,6 +179,7 @@ public class user {
 		if ( borrowed_old == 5 ){
 			 System.out.println("you can't borrow more than five books");
 			max_borrowed = true;
+			return;
 			
 		}		
 		else if(borrowed_old < 5)	{
@@ -186,6 +191,7 @@ public class user {
 			borrowed_books.add(adding_borrow);
 			borrowed_successfully = true;
 			 System.out.println("borrowed successfully");
+			 return;
 		}
 	}
 		else System.out.println("user login required");
@@ -211,7 +217,7 @@ public class user {
 	
 	public void return_book(String book_id , String user_id) {
 		 removed = false ;
-		if (true)
+		if (Logged_in())
 		{
 			ArrayList<String> check = new ArrayList<String>();
 			check.add(book_id);
@@ -224,10 +230,14 @@ public class user {
 						borrowed_books.remove(i);
 						 removed = true ;
 						 System.out.println("removed successfully");
+						 return;
 					}
 				}
-			
+			 System.out.println("this book is not borrowed by you");
+			 return;
 			}
+		 System.out.println("user login required");
+		 return;
 		}
 	
 	public boolean is_removed() {
